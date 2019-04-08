@@ -1,0 +1,31 @@
+package assignment12;
+public class Player 
+{
+	private String name;
+	private int point;
+	public Player(String name,int p)
+	{
+		this.name=name;
+		point=0;
+	}
+	public void addPoint(int num)
+	{
+		point=point+num;
+	}
+	public void setName(String name)
+	{
+		this.name=name;
+	}
+	public void setPoint(int point)
+	{
+		this.point=point;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public int getPoint()
+	{
+		return point;
+	}
+}
