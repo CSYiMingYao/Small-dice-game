@@ -1,0 +1,146 @@
+//YiMing Yao
+//CIS254 Assignment12 Problem2
+//This problem is to create the interesting dice game
+package assignment12;
+import java.util.Random;
+import java.util.Scanner;
+public class playerApp 
+{
+	static Scanner input=new Scanner(System.in);
+	public static int rollDice()
+	{
+		Random rand=new Random();
+		int point;
+		return point=1+rand.nextInt(6);//get points
+	}//end method
+	public static void main(String[] args) 
+	{
+		//declare the variables
+		int numplayers,numpoint,loop=1;;
+		String name,option;
+		System.out.print("How many players? ");
+		numplayers=Integer.parseInt(input.nextLine());
+		Player[] box= new Player[numplayers];//create the array for object
+		for(int i=0;i<numplayers;i++)
+		{
+			System.out.printf("Enter play %d name: ", i+1);
+			name=input.nextLine();
+			box[i]=new Player(name,0);//constructor method
+		}//end loop
+		System.out.println();
+		System.out.println("Let's play pig!");
+		do
+		{
+			for(int index=0;index<box.length;index++)
+			{
+				int total=0;
+				System.out.println();
+				System.out.printf("Your trun %s, current points: %d%n",box[index].getName(),box[index].getPoint());
+				do
+				{
+					numpoint=rollDice();
+					if(numpoint!=1)
+					{
+						total+=numpoint;
+						System.out.printf("You rolled %d, your turn total is %d%n",numpoint,total);
+						System.out.print("Enter r to roll again, or h to hold: ");
+						option=input.nextLine();
+					}
+					else 
+					{
+						System.out.println("You rolled 1, sorry you lose your points");
+						total=0;//lose the points, because you rolled 1
+						option="h";//quit the loop
+					}
+			}while(option.equals("r"));
+			box[index].addPoint(total);//set the total point
+			System.out.printf("%s has %d point%n",box[index].getName(), box[index].getPoint());
+			if(box[index].getPoint()>=50)
+			{
+				System.out.println(box[index].getName()+" win");
+				loop=0;//quit the programming,and win
+				break;
+			}//end if
+		}//end loop
+		}while(loop==1);//end loop(switch every single player
+	}//end main
+}//end class
+/*
+How many players? 2
+Enter play 1 name: jessie
+Enter play 2 name: yao
+
+Let's play pig!
+
+Your trun jessie, current points: 0
+You rolled 6, your turn total is 6
+Enter r to roll again, or h to hold: r
+You rolled 2, your turn total is 8
+Enter r to roll again, or h to hold: r
+You rolled 2, your turn total is 10
+Enter r to roll again, or h to hold: r
+You rolled 2, your turn total is 12
+Enter r to roll again, or h to hold: r
+You rolled 5, your turn total is 17
+Enter r to roll again, or h to hold: h
+jessie has 17 point
+
+Your trun yao, current points: 0
+You rolled 1, sorry you lose your points
+yao has 0 point
+
+Your trun jessie, current points: 17
+You rolled 2, your turn total is 2
+Enter r to roll again, or h to hold: r
+You rolled 1, sorry you lose your points
+jessie has 17 point
+
+Your trun yao, current points: 0
+You rolled 1, sorry you lose your points
+yao has 0 point
+
+Your trun jessie, current points: 17
+You rolled 2, your turn total is 2
+Enter r to roll again, or h to hold: r
+You rolled 3, your turn total is 5
+Enter r to roll again, or h to hold: r
+You rolled 3, your turn total is 8
+Enter r to roll again, or h to hold: r
+You rolled 4, your turn total is 12
+Enter r to roll again, or h to hold: h
+jessie has 29 point
+
+Your trun yao, current points: 0
+You rolled 1, sorry you lose your points
+yao has 0 point
+
+Your trun jessie, current points: 29
+You rolled 1, sorry you lose your points
+jessie has 29 point
+
+Your trun yao, current points: 0
+You rolled 3, your turn total is 3
+Enter r to roll again, or h to hold: r
+You rolled 6, your turn total is 9
+Enter r to roll again, or h to hold: r
+You rolled 6, your turn total is 15
+Enter r to roll again, or h to hold: r
+You rolled 1, sorry you lose your points
+yao has 0 point
+
+Your trun jessie, current points: 29
+You rolled 6, your turn total is 6
+Enter r to roll again, or h to hold: r
+You rolled 2, your turn total is 8
+Enter r to roll again, or h to hold: r
+You rolled 5, your turn total is 13
+Enter r to roll again, or h to hold: r
+You rolled 4, your turn total is 17
+Enter r to roll again, or h to hold: r
+You rolled 4, your turn total is 21
+Enter r to roll again, or h to hold: r
+You rolled 2, your turn total is 23
+Enter r to roll again, or h to hold: h
+jessie has 52 point
+jessie win
+*/
